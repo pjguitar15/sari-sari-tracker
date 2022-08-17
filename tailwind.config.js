@@ -14,7 +14,9 @@ module.exports = {
     fontFamily: {
       Poppins: ['Poppins', 'sans serif']
     },
-    extend: {},
+    extend: {
+
+    },
   },
   plugins: [require('@tailwindcss/forms')],
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import { LoginForm } from './LoginForm'
+// assets
+import tindahan from '../../assets/tindahan.png'
 
 const Login = () => {
   return (
@@ -10,10 +12,10 @@ const Login = () => {
         <h1 className='font-semibold text-6xl uppercase'>Login</h1>
         <LoginForm />
       </div>
-      <div className='flex-1 h-screen bg-indigo-900 flex items-center justify-center'>
-        <h1 className='font-semibold text-6xl text-white uppercase'>
-          Some art here
-        </h1>
+      <div
+        className={`flex-1 h-screen bg-indigo-900 flex items-center justify-center`}
+      >
+        {/* <img className='h-full w-auto' src={tindahan} alt='' /> */}
       </div>
     </div>
   )
