@@ -1,0 +1,66 @@
+[
+  {
+    "id": "1",
+    "name": "555 Tuna Afritada",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660699458/can_yvutmq.png",
+    "available": 0,
+    "price": 24,
+    "category": "can"
+  },
+  {
+    "id": "2",
+    "name": "Hot and Spicy Century Tuna",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660699914/Century_Tuna_Flakes_Hot_Spicy_420g_1e60e350-6660-4087-a3e2-227ab640be18_400x-removebg-preview_odxlgw.png",
+    "available": 8,
+    "price": 22,
+    "category": "can"
+  },
+  {
+    "id": "3",
+    "name": "Indomie Instant Noodles",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660703563/71B4YNvwCtL._SL1500_-removebg-preview_d6iwhw.png",
+    "available": 4,
+    "price": 30,
+    "category": "noodles"
+  },
+  {
+    "id": "4",
+    "name": "Nescafe Tipid Pack",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660703642/81nuz2E4fYL._SL1500_-removebg-preview_huj6ck.png",
+    "available": 8,
+    "price": 62,
+    "category": "pack"
+  },
+  {
+    "id": "5",
+    "name": "Datu Puti Suka",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660703752/18892330-removebg-preview_zxwo8z.png",
+    "available": 4,
+    "price": 27,
+    "category": "pack"
+  },
+  {
+    "id": "6",
+    "name": "Datu Puti Toyo",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660703895/a9d87068fe790d572573834555742a36-removebg-preview_uwibzq.png",
+    "available": 8,
+    "price": 22,
+    "category": "pack"
+  },
+  {
+    "id": "7",
+    "name": "Argentina Meat Loaf",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660703997/9842a48754ad0f6ae2c22f4d5d032d0c-removebg-preview_bcjp5j.png",
+    "available": 4,
+    "price": 24,
+    "category": "can"
+  },
+  {
+    "id": "8",
+    "name": "Argentina Corned Beef",
+    "img": "https://res.cloudinary.com/philcob/image/upload/v1660704052/150g-argentina-corned-beef-removebg-preview_jlt3by.png",
+    "available": 0,
+    "price": 22,
+    "category": "can"
+  }
+]
