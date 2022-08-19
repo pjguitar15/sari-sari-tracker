@@ -6,13 +6,13 @@ import RedAlert from '../../components/alerts/RedAlert'
 // packages
 import { useFormik } from 'formik'
 import { useNavigate } from 'react-router-dom'
+// context
+import { useAuth } from '../../context/AuthProvider'
 
 const initialValues = {
   username: '',
   password: '',
 }
-
-const testCredentials = { username: 'pjguitar15', password: 'adminadmin' }
 
 const validate = (values) => {
   let errors = {}
@@ -27,26 +27,19 @@ const validate = (values) => {
 
 export const LoginForm = () => {
   const [showLoginError, setShowLoginError] = useState(false)
+  const { login, isLoading } = useAuth()
   const navigate = useNavigate()
+  // login function
   const onSubmit = (values) => {
-    if (
-      testCredentials.username === values.username &&
-      testCredentials.password === values.password
-    ) {
-      const randomToken = 'asd123'
-      sessionStorage.setItem('Auth Token', randomToken)
-      navigate('/')
-      setShowLoginError(false)
-    } else {
-      setShowLoginError(true)
-    }
+    login(values.username, values.password)
   }
+  // formik
   const formik = useFormik({
     initialValues,
     onSubmit,
     validate,
   })
-
+  // do not allow user to go to home page if no session token
   useEffect(() => {
     let authToken = sessionStorage.getItem('Auth Token')
     if (authToken) {
@@ -58,7 +51,7 @@ export const LoginForm = () => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className='bg-gray-50 border border-gray-300 shadow-sm p-8 lg:w-9/12 mt-5'
+      className='bg-gray-50 border border-gray-300 shadow-sm p-8 lg:w-9/12 mt-5 z-50'
     >
       <div className='my-2'>
         {/* username */}
@@ -67,7 +60,7 @@ export const LoginForm = () => {
           value={formik.values.username}
           name='username'
           className='w-full'
-          placeholder='Enter username'
+          placeholder='Enter your email'
           type='text'
         />
         {/* formik error */}
@@ -96,7 +89,12 @@ export const LoginForm = () => {
       </div>
       <div className='my-2'>
         {/* Button */}
-        <PrimaryButton text='Login' isSubmit={true} isFullWidth={true} />
+        <PrimaryButton
+          disabled={isLoading}
+          text='Login'
+          isSubmit={true}
+          isFullWidth={true}
+        />
         {showLoginError ? (
           <div className='mt-3'>
             <RedAlert

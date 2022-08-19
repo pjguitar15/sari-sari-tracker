@@ -7,6 +7,8 @@ import ProductOutline from '../../components/icons/ProductOutline'
 import SalesOutline from '../../components/icons/SalesOutline'
 import AccountOutline from '../../components/icons/AccountOutline'
 import LogoutOutline from '../../components/icons/LogoutOutline'
+// context
+import { useAuth } from '../../context/AuthProvider'
 
 const Sidebar = ({ selectedLink, setSelectedLink }) => {
   const navigate = useNavigate()
@@ -21,8 +23,16 @@ const Sidebar = ({ selectedLink, setSelectedLink }) => {
   return (
     <div className='font-Poppins h-screen bg-indigo-50 w-3/12'>
       <div className='bg-indigo-800 flex flex-col items-center justify-center py-10'>
-        <h1 className='text-5xl text-white'>Admin</h1>
-        <h1 className='text-lg text-slate-200'>Owner</h1>
+        <h1 className='text-5xl text-white font-bold mb-4'>
+          {localStorage.getItem('businessName')}
+        </h1>
+
+        <h1 className='text-2xl text-white border-t border-indigo-400 w-5/6 text-center pt-5'>
+          Hi, {localStorage.getItem('firstName')}!
+        </h1>
+        <h1 className='text-lg text-indigo-400'>
+          {localStorage.getItem('email')}
+        </h1>
       </div>
 
       {/* Links */}

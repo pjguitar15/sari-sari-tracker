@@ -4,8 +4,11 @@ import { useFormik } from 'formik'
 // components
 import PrimaryButton from '../../components/buttons/PrimaryButton'
 import RegisterButton from './RegisterButton'
+// context
+import { useAuth } from '../../context/AuthProvider'
 
 const initialValues = {
+  businessName: '',
   firstName: '',
   middleName: '',
   lastName: '',
@@ -17,6 +20,9 @@ const initialValues = {
 const validate = (values) => {
   let errors = {}
 
+  if (!values.businessName) {
+    errors.businessName = 'Required'
+  }
   if (!values.firstName) {
     errors.firstName = 'Required'
   }
@@ -35,6 +41,10 @@ const validate = (values) => {
   if (!values.password) {
     errors.password = 'Required'
   }
+  // if password is shorter than 6 characters
+  if (values.password.length < 6) {
+    errors.password = 'Password should be not less than 6 characters'
+  }
   if (!values.confirmPassword) {
     errors.confirmPassword = 'Required'
   }
@@ -51,18 +61,47 @@ const validate = (values) => {
 
   return errors
 }
-
-const onSubmit = (values) => {
-  console.log(values)
-}
 export const SignUpForm = () => {
-  const formik = useFormik({ initialValues, onSubmit, validate })
+  const { signup, isLoading } = useAuth()
+  const formik = useFormik({
+    initialValues,
+    onSubmit: (values) => {
+      signup(
+        values.email,
+        values.password,
+        values.firstName,
+        values.middleName,
+        values.lastName,
+        values.username,
+        values.businessName
+      )
+    },
+    validate,
+  })
+  // context
 
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className='bg-slate-50 border border-gray-300 shadow-sm p-8 lg:w-9/12 mt-5'
+      className='bg-slate-50 border border-gray-300 shadow-sm p-8 lg:w-9/12 mt-5 z-50'
     >
+      <div className='my-2'>
+        <div className='text-sm mb-2'>Business Name</div>
+        <input
+          onChange={formik.handleChange}
+          value={formik.values.businessName}
+          name='businessName'
+          className='w-full'
+          placeholder='Enter Business/Store Name'
+          type='text'
+        />
+        {/* formik error */}
+        {formik.errors.firstName ? (
+          <div className='text-sm text-red-500'>{formik.errors.firstName}</div>
+        ) : (
+          ''
+        )}
+      </div>
       {/* First, Middle, Last Name */}
       <div className='my-2'>
         <div className='text-sm mb-2'>First Name</div>
@@ -195,7 +234,12 @@ export const SignUpForm = () => {
       </div>
       <div className='my-4'>
         {/* Button */}
-        <PrimaryButton text='Sign Up' isSubmit={true} isFullWidth={true} />
+        <PrimaryButton
+          disabled={isLoading}
+          text='Sign Up'
+          isSubmit={true}
+          isFullWidth={true}
+        />
       </div>
       {/* Register */}
       <RegisterButton />

@@ -6,22 +6,20 @@ import can from '../../../../assets/can.png'
 import Products from '../../../../data/Products.json'
 import ChevronLeft from '../../../../components/icons/ChevronLeft'
 import ChevronRight from '../../../../components/icons/ChevronRight'
-// packages
-// import axios from 'axios'
+// context
+import { useFirestore } from '../../../../context/FirestoreProvider'
 const CompleteProductList = ({ searchInput }) => {
-  const [data, setData] = useState([])
+  // context
+  const { productData, loading } = useFirestore()
   // pagination states
   const [currentPage, setCurrentPage] = useState(1)
   const [itemsPerPage, setItemsPerPage] = useState(5)
-  useEffect(() => {
-    setData(Products)
-  }, [])
 
   // Get current posts
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem)
-  const totalPages = Math.ceil(data.length / itemsPerPage)
+  const currentItems = productData.slice(indexOfFirstItem, indexOfLastItem)
+  const totalPages = Math.ceil(productData.length / itemsPerPage)
   return (
     <div className=''>
       <div className='text-2xl mb-3'>Products List</div>
@@ -40,15 +38,27 @@ const CompleteProductList = ({ searchInput }) => {
         </div>
         {/* Item list */}
         <div className='py-4'>
-          {currentItems
-            .filter(
-              (item) =>
-                item.name.toLowerCase().includes(searchInput.toLowerCase()) ||
-                item.category.toLowerCase().includes(searchInput.toLowerCase())
-            )
-            .map((item, index) => (
-              <ItemRow key={index} item={item} />
-            ))}
+          {loading ? (
+            <h1 className='text-center text-6xl text-gray-300 font-semibold my-12'>
+              LOADING...
+            </h1>
+          ) : productData.length > 0 ? (
+            currentItems
+              .filter(
+                (item) =>
+                  item.productName
+                    .toLowerCase()
+                    .includes(searchInput.toLowerCase()) ||
+                  item.category
+                    .toLowerCase()
+                    .includes(searchInput.toLowerCase())
+              )
+              .map((item, index) => <ItemRow key={index} item={item} />)
+          ) : (
+            <div className='text-7xl font-medium text-gray-300 text-center my-12'>
+              Product List Empty!
+            </div>
+          )}
         </div>
         {/* Pagination Buttons */}
         <div className='text-center flex justify-center mt-4'>
