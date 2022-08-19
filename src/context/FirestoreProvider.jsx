@@ -43,8 +43,8 @@ export const FirestoreProvider = ({ children }) => {
     getAuth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email)
-        // find the user data that matches the current logged user
         setLoading(true)
+        // find the user data that matches the current logged user
         const q = query(collectionRef, orderBy('timestamp', 'desc'))
         const getData = async () => {
           const data = await getDocs(q)
@@ -53,7 +53,9 @@ export const FirestoreProvider = ({ children }) => {
             (item) => item.email === user.email
           )
           // console.log(filteredUsers[0].products)
-          setProductData(filteredUsers[0].products)
+          if (filteredUsers[0].products.length > 0) {
+            setProductData(filteredUsers[0].products)
+          }
           setLoading(false)
         }
         getData()

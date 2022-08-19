@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }) => {
             username,
             email: emailInput,
             businessName,
+            products: [],
             timestamp: serverTimestamp(),
           })
             .then((res) => console.log(res))
@@ -164,7 +165,7 @@ export const AuthProvider = ({ children }) => {
         const updateItem = async () => {
           const userDoc = doc(db, 'users', currentUserFirestoreId)
           const newFields = {
-            products: currentProductArray ,
+            products: currentProductArray,
             test: '123',
           }
           await updateDoc(userDoc, newFields)
