@@ -47,7 +47,7 @@ const Login = () => {
             <p className='text-gray-300 text-xl font-Poppins font-light w-5/6 mt-3 mx-auto leading-9 animate-pulse'>
               A website application that tracks your product inventory, check
               your monthly sales, manage your business easier using charts to
-              track your business progress.
+              track your progress.
             </p>
           </div>
         </div>

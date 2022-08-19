@@ -55,6 +55,7 @@ export const AuthProvider = ({ children }) => {
           // set local storage. ISSUE: Doesn't update the previous item unless you refresh
           localStorage.setItem('firstName', filtered[0].firstName)
           localStorage.setItem('businessName', filtered[0].businessName)
+          window.location.reload()
         }
         getData()
       }
