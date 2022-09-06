@@ -1,8 +1,12 @@
 import React from 'react'
 // icons
-import PlusOutline from '../../../../components/icons/PlusOutline'
 
-const ItemRow = ({ item }) => {
+const ItemRow = ({ item, setCurrentItem }) => {
+  // functions
+  const editHandler = (thisItem) => {
+    console.log(thisItem)
+    setCurrentItem(thisItem)
+  }
   return (
     <div className='flex py-1 border-b font-Poppins'>
       <div className='py-1 w-1/12 flex items-center justify-center uppercase'>
@@ -34,7 +38,12 @@ const ItemRow = ({ item }) => {
         )}
       </div>
       <div className='py-1 gap-2 flex items-center justify-center w-2/12'>
-        <button className='text-sky-500 font-semibold uppercase'>Edit</button>
+        <button
+          onClick={() => editHandler(item)}
+          className='text-sky-500 font-semibold uppercase'
+        >
+          Edit
+        </button>
         <button className='text-red-500 font-semibold uppercase'>DELETE</button>
       </div>
     </div>

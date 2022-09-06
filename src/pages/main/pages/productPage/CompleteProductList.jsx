@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import ItemRow from './ItemRow'
 // assets
-import can from '../../../../assets/can.png'
 // data
-import Products from '../../../../data/Products.json'
 import ChevronLeft from '../../../../components/icons/ChevronLeft'
 import ChevronRight from '../../../../components/icons/ChevronRight'
 // context
 import { useFirestore } from '../../../../context/FirestoreProvider'
+import EditModal from './EditModal'
 const CompleteProductList = ({ searchInput }) => {
+  // states
+  const [currentItem, setCurrentItem] = useState([])
   // context
   const { productData, loading } = useFirestore()
   // pagination states
@@ -37,6 +38,7 @@ const CompleteProductList = ({ searchInput }) => {
           <div className='font-semibold py-1 text-center w-2/12'></div>
         </div>
         {/* Item list */}
+        <EditModal setCurrentItem={setCurrentItem} currentItem={currentItem} />
         <div className='py-4'>
           {loading ? (
             <h1 className='text-center text-6xl text-gray-300 font-semibold my-12'>
@@ -53,7 +55,14 @@ const CompleteProductList = ({ searchInput }) => {
                     .toLowerCase()
                     .includes(searchInput.toLowerCase())
               )
-              .map((item, index) => <ItemRow key={index} item={item} />)
+              .map((item, index) => (
+                <ItemRow
+                  setCurrentItem={setCurrentItem}
+                  key={index}
+                  item={item}
+                  setCurrentId={setCurrentItem}
+                />
+              ))
           ) : (
             <div className='text-7xl font-medium text-gray-300 text-center my-12'>
               Product List Empty!
