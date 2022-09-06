@@ -147,6 +147,7 @@ const DefaultModal = () => {
               <option value='can'>Can</option>
               <option value='pack'>Pack</option>
               <option value='noodles'>Noodles</option>
+              <option value='bottle'>Bottle</option>
             </select>
             {/* Stock */}
             <label

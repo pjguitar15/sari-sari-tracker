@@ -23,7 +23,7 @@ const Sidebar = ({ selectedLink, setSelectedLink }) => {
   return (
     <div className='font-Poppins h-screen bg-indigo-50 w-3/12'>
       <div className='bg-indigo-800 flex flex-col items-center justify-center py-10'>
-        <h1 className='text-5xl text-white font-bold mb-4'>
+        <h1 className='text-5xl text-center text-white font-bold mb-4'>
           {localStorage.getItem('businessName')}
         </h1>
 
